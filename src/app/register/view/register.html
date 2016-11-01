@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Knowledge Base</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <ion-list class="hidden" id="registerForm">
+        <ion-item>
+          <h1>Register</h1>
+        </ion-item>
+        <ion-item>
+          <ion-label>Username</ion-label>
+          <ion-input type="text" [(ngModel)]="currentUser.username"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-input type="password" [(ngModel)]="currentUser.password"></ion-input>
+        </ion-item>
+        <ion-item>
+           <button ion-button class="login-button full-width" (click)="doRegister()">Login</button>
+        </ion-item>
+      </ion-list>
+      <ion-list class="hidden" id="displayNameText">
+        <ion-item>
+          <ion-label>Enter Your Name</ion-label>
+          <ion-input type="text" [(ngModel)]="currentUser.displayName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Enter Your Name</ion-label>
+          <button ion-button class="login-button full-width">Submit</button>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+  <!-- ion-row>
+    <ion-col>
+     
+    </ion-col>
+  </ion-row -->
+</ion-content>

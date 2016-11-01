@@ -5,7 +5,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 
-import { Home } from 'home/component/home';
+import { Register } from 'register/component/register';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Home } from 'home/component/home';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Home;
+  rootPage: any = Register;
 
   pages: Array<{title: string, component: any}>;
 
