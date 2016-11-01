@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-
+import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
-// import { Device } from 'ionic-native';
 
 import {AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
+
+// import {Page1} from '../../../pages/page1/page1'
 
 @Component({
   selector: 'home',
@@ -11,11 +11,10 @@ import {AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from '
 })
 
 export class Home{
-  
   public currentUser: any = {};
   items: FirebaseListObservable<any[]>;
 
-  constructor(public af : AngularFire){
+  constructor(public af : AngularFire, public navCtrl: NavController){
     this.doLogin();
   }
 
@@ -23,8 +22,12 @@ export class Home{
     var that = this;
     this.af.auth.login({email: 'gopiwrld@gmail.com', password:'1234567890'},{ provider: AuthProviders.Password, method: AuthMethods.Password}).then(function(response:any){
       console.log('response ::: ', response);
-      debugger;
       that.currentUser = response.auth;
+      debugger;
+      // that.navCtrl.push(Page1);  Redirect to another page
+      if(that.currentUser.displayName == '' || that.currentUser.displayName == null){
+        
+      }
     });
   }
 
