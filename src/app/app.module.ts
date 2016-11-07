@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
 
 // Services
 import { RegisterService } from './register/service/register';
+import { AppService } from './common/service/app-service';
 
 // Components
 import { Register } from './register/component/register';
 import { Home } from './home/component/home';
+import { Challenge } from './challenge/component/challenge';
 
 import { AngularFireModule } from 'angularfire2';
 
@@ -26,10 +26,9 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    Page1,
-    Page2,
     Register,
-    Home
+    Home,
+    Challenge
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -38,12 +37,12 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Page1,
-    Page2,
     Register,
-    Home
+    Home,
+    Challenge
   ],
   providers: [
+    AppService,
     RegisterService
   ]
 })

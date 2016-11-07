@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
+import {AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
+// import { Page1 } from '../pages/page1/page1';
+// import { Page2 } from '../pages/page2/page2';
 
 import { Register } from 'register/component/register';
 
@@ -17,16 +18,13 @@ export class MyApp {
   rootPage: any = Register;
 
   pages: Array<{title: string, component: any}>;
-
+  
   constructor(public platform: Platform) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Page One', component: Page1 },
-      { title: 'Page Two', component: Page2 }
+      { title: 'Fruits Updated', component: '' },
+      { title: 'Vegetables', component: '' }
     ];
-
   }
 
   initializeApp() {

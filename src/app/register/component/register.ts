@@ -2,10 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 
-// import {Page1} from '../../../pages/page1/page1'
-
 import { RegisterService } from '../../register/service/register';
 import { Home } from '../../home/component/home';
+import {MyApp} from '../../app.component';
 
 @Component({
   selector: 'register',
