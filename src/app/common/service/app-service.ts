@@ -11,7 +11,15 @@ export class AppService{
     }
 
     getCategories(){
-         return this.categories = this.af.database.list('/categories');
+        var that = this;
+        /*return new Promise(function(resolve, reject){
+            that.af.database.list('/categories').subscribe(resp => {
+                console.log('Categories :::: ', resp);  
+                resolve(resp);
+            });
+        });*/
+        return that.af.database.list('/categories');
+
     }
 
 }
