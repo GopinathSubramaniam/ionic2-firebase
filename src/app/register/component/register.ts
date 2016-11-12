@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {AngularFire, FirebaseListObservable, AuthProviders, AuthMethods } from 'angularfire2';
 
+import { AppService } from '../../common/service/app-service';
 import { RegisterService } from '../../register/service/register';
 import { Home } from '../../home/component/home';
 import {MyApp} from '../../app.component';
@@ -14,47 +15,64 @@ import {MyApp} from '../../app.component';
 export class Register{
   public currentUser: any = {};
   items: FirebaseListObservable<any[]>;
+  message = '';
+  user = {};
 
+  showLogin = false;
+  showDisplayName = false;
+  
   constructor(public af : AngularFire, 
               public navCtrl: NavController, 
+              public appService: AppService,
               public registerService: RegisterService
               ){
     
   }
 
   ngAfterViewInit(){
-    // this.doLogin();
+    console.log('ngAfterViewInit : Register Page');
     var that = this;
-    this.registerService.doLogin().then(function(result){
-      that.currentUser = result;
-      if(that.currentUser){
-         console.log('Current User ::::: ', that.currentUser);
-        if(that.currentUser && that.currentUser.displayName){
-          that.navCtrl.push(Home);
+    this.appService.storageGetItem('loggedInUser').then(function(loggedInUser:any){
+        console.log('loggedInUser : ', loggedInUser);
+        if(loggedInUser && loggedInUser.password){
+          that.registerService.doLogin(loggedInUser.username, loggedInUser.password).then(function(result:any){
+            if(result && result.email){
+              if(result && result.displayName){
+                that.navCtrl.push(Home);
+              }else{
+                that.showDisplayName = true;
+                that.showLogin = false;
+              }
+            }else{
+              that.showLogin = true;
+              that.showDisplayName = false;
+              that.message = result.message;
+            }
+          });
+        }else{
+          that.showLogin = true;
         }
-      }
     });
   }
 
   doLogin(){
-    /* var that = this;
-    this.af.auth.login({email: 'gopiwrld@gmail.com', password:'1234567890'},{ provider: AuthProviders.Password, method: AuthMethods.Password}).then(function(response:any){
-      console.log('response ::: ', response);
-      that.currentUser = response.auth;
-      if(that.currentUser){
-        if(that.currentUser.displayName == '' || that.currentUser.displayName == null){
-          var elem = document.getElementById('displayNameText');
-          elem.classList.remove('hidden');
-        }else{
+    var that = this;
+    this.registerService.doLogin(this.currentUser.username, this.currentUser.password).then(function(result:any){
+      if(result && result.email){
+        if(result && result.displayName){
+          that.appService.storageSetItem('loggedInUser', that.currentUser);
           that.navCtrl.push(Home);
+        }else{
+          that.appService.storageSetItem('loggedInUser', that.currentUser);
+          that.showLogin = false;
+          that.showDisplayName = true;
         }
+      }else{
+        that.showLogin = true;
+        that.showDisplayName = false;
+        that.message = result.message;
       }
-      // that.navCtrl.push(Page1);  Redirect to another page
-    }).catch(function(error){
-        var elem = document.getElementById('registerForm');
-        elem.classList.remove('hidden');
-        console.log('error ::::: ', error);
-    });*/
+    });
   }
 
   doRegister(){

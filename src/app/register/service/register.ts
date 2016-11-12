@@ -9,10 +9,10 @@ export class RegisterService{
 
     }
 
-    doLogin(){
+    doLogin(email:any, password:any){
         var that = this;
         return new Promise(function(resolve, reject) {
-            that.af.auth.login({email: 'gopiwrld@gmail.com', password:'1234567890'},{ provider: AuthProviders.Password, method: AuthMethods.Password}).then(function(response:any){
+            that.af.auth.login({email: email, password: password},{ provider: AuthProviders.Password, method: AuthMethods.Password}).then(function(response:any){
                 console.log('response ::: ', response);
                 var currentUser = response.auth;
                 if(currentUser){

@@ -35,15 +35,6 @@ export class MyApp {
       Splashscreen.hide();
     });
     var that = this;
-    /*this.appService.getCategories().then(function(resp:Array<any>){
-      var arr = [];
-      resp.forEach(function(item){
-        console.log('Item ::: ', item);
-        arr.push({ title: item.name, component: '' });
-      });
-      this.pages = arr;
-      console.log('App Component Categories :: ', this.pages);
-    });*/
     this.pages = this.appService.getCategories();
   }
 

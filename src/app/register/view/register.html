@@ -6,9 +6,9 @@
 <ion-content>
   <ion-row>
     <ion-col>
-      <ion-list class="hidden" id="registerForm">
+      <ion-list *ngIf="showLogin" id="registerForm">
         <ion-item>
-          <h1>Register</h1>
+          <ion-label><h1>Login</h1></ion-label><ion-label class="error">{{message}}</ion-label>
         </ion-item>
         <ion-item>
           <ion-label>Username</ion-label>
@@ -19,10 +19,10 @@
           <ion-input type="password" [(ngModel)]="currentUser.password"></ion-input>
         </ion-item>
         <ion-item>
-           <button ion-button class="login-button full-width" (click)="doRegister()">Login</button>
+           <button ion-button class="login-button full-width" (click)="doLogin()">Login</button>
         </ion-item>
       </ion-list>
-      <ion-list class="hidden" id="displayNameText">
+      <ion-list *ngIf="showDisplayName" id="displayNameText">
         <ion-item>
           <ion-label>Enter Your Name</ion-label>
           <ion-input type="text" [(ngModel)]="currentUser.displayName"></ion-input>
